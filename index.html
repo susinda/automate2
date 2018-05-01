@@ -46,6 +46,14 @@
                             </span>
                         </a>
                     </li>
+                    
+					<li role="presentation" class="disabled">
+                        <a href="#step4" data-toggle="tab" aria-controls="step4" role="tab" title="Step 4">
+                            <span class="round-tab">
+                                <i class="glyphicon glyphicon-picture"></i>
+                            </span>
+                        </a>
+                    </li>
 
                     <li role="presentation" class="disabled">
                         <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Complete">
@@ -60,8 +68,8 @@
             <form role="form">
                 <div class="tab-content">
                     <div class="tab-pane active" role="tabpanel" id="step1">
-                        <h3>Step 1</h3>
-                        <p>This is step 1</p>
+                        <h3>Import</h3>
+                        <p>Choose Import source</p>
                         	<div class="radio">
 							  <label><input type="radio" name="importType" id="manual" value="manual">Enter Manually</label>
 							  <div id="fromManual"><textarea class="form-control" rows="2" id="comment"></textarea></div>
@@ -75,30 +83,77 @@
 							  <div style="display: inline" id="fromApi"><button type="button" id="btnImportApi">Query</button>
 							  <label name="nsDestApi" id="nsDestApi">http://xxxxxxxxx/services/destinations</label></div>
 							</div>   
+							<p>
+							<p>
                         <ul class="list-inline pull-right">
-                            <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
+                            <li><button type="button" class="btn btn-primary next-step">Next</button></li>
                         </ul>
                     </div>
                     <div class="tab-pane" role="tabpanel" id="step2">
-                        <h3>Step 2</h3>
-                        <p>This is step 2</p>
+                        <h3>Review</h3>
+                        <p>Following Gts will be used</p>
+                        <p>
+                        <table id="example" class="display" style="width:100%">
+										<thead>
+											<tr>
+												<th></th>
+												<th>Name</th>
+												<th>Position</th>
+												<th>Office</th>
+												<th>Age</th>
+												<th>Salary</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td></td>
+												<td>Ashton Cox</td>
+												<td>Junior Technical Author</td>
+												<td>San Francisco</td>
+												<td>66</td>
+												<td>$86,000</td>
+											</tr>
+											<tr>
+												<td></td>
+												<td>Cedric Kelly</td>
+												<td>Senior Javascript Developer</td>
+												<td>Edinburgh</td>
+												<td>22</td>
+												<td>$433,060</td>
+											</tr>
+										
+										</tbody>
+										</table>
+										<p><p><p>
+									
                         <ul class="list-inline pull-right">
                             <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-                            <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
+                            <li><button type="button" class="btn btn-primary next-step">Next</button></li>
                         </ul>
                     </div>
                     <div class="tab-pane" role="tabpanel" id="step3">
-                        <h3>Step 3</h3>
-                        <p>This is step 3</p>
+                        <h3>Search New Numbers</h3>
+                        <p>Configure Search options</p>
+                        <p><p><p>
                         <ul class="list-inline pull-right">
                             <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
                             <li><button type="button" class="btn btn-default next-step">Skip</button></li>
-                            <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
+                            <li><button type="button" class="btn btn-primary btn-info-full next-step">Next</button></li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane" role="tabpanel" id="step4">
+                        <h3>Results</h3>
+                        <p>View Results</p>
+                        <p><p><p>
+                        <ul class="list-inline pull-right">
+                            <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+                            <li><button type="button" class="btn btn-default next-step">Skip</button></li>
+                            <li><button type="button" class="btn btn-primary btn-info-full next-step">Next</button></li>
                         </ul>
                     </div>
                     <div class="tab-pane" role="tabpanel" id="complete">
-                        <h3>Complete</h3>
-                        <p>You have successfully completed all steps.</p>
+                        <h3>Update</h3>
+                        <p>Update the system with new results</p>
                     </div>
                     <div class="clearfix"></div>
                 </div>
