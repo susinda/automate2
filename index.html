@@ -27,9 +27,9 @@
         <div class="wizard">
             <div class="wizard-inner">
                 <div class="connecting-line"></div>
-                <ul class="nav nav-tabs" role="tablist">
+                <ul class="nav nav-tabs" role="tablist" name="tabList">
 
-                    <li role="presentation" class="active">
+                    <li role="presentation" class="active" name="step01">
                         <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Step 1">
                             <span class="round-tab">
                                 <i class="glyphicon glyphicon-folder-open"></i>
@@ -37,14 +37,14 @@
                         </a>
                     </li>
 
-                    <li role="presentation" class="disabled">
+                    <li role="presentation" class="disabled" name="step02">
                         <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Step 2">
                             <span class="round-tab">
                                 <i class="glyphicon glyphicon-pencil"></i>
                             </span>
                         </a>
                     </li>
-                    <li role="presentation" class="disabled">
+                    <li role="presentation" class="disabled" name="step03">
                         <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Step 3">
                             <span class="round-tab">
                                 <i class="glyphicon glyphicon-picture"></i>
@@ -77,7 +77,7 @@
                         <p>Choose Import source</p>
                         	<div class="radio">
 							  <label><input type="radio" name="importType" id="manual" value="manual">Enter Manually</label>
-							  <div id="fromManual"><textarea class="form-control" rows="2" id="comment"></textarea></div>
+							  <div id="fromManual"><textarea class="form-control" rows="2" id="txtManual" name="txtManual"></textarea></div>
 							</div>
 							<div class="radio">
 							  <label><input type="radio" name="importType" id="file" value="file" >From File</label>
