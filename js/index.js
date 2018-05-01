@@ -70,6 +70,7 @@ $(document).ready(function () {
     
     $( "#btnImportApi" ).click(function() {
     	  console.log( "btnImportApi .click() called." );
+    	  httpGET();
     	  $("#nsDestApi").show();
     });
     
@@ -125,7 +126,7 @@ function validateStep1() {
 			dataTable.fnAddData(dataSet);
 			return true;
 		}
-	} else if ($("#optFile").is(':checked')) {
+	} else if ($("#optFile").is(':checked') || $("#optApi").is(':checked')) {
 		if ($("#example").dataTable().fnGetData().length > 0) {
 			return true;
 		} else {
@@ -133,6 +134,7 @@ function validateStep1() {
 			return false;
 		}
    }
+	
 }
 
 function validateStep2() {
@@ -172,4 +174,30 @@ function readSingleFile(evt) {
     }
 
   }
+
+
+function httpGET() {
+	var http = new XMLHttpRequest();
+	var url = "http://localhost:8080/netsense/services/destinations/3a022d92e3ef292d37c47f6f37b63b26/AFRICA/ANGOLA";
+	http.open("GET", url, true);
+	http.setRequestHeader("Accept", "application/json");
+ 
+	http.onreadystatechange = function() {//Call a function when the state changes.
+	    if(http.readyState == 4 && http.status == 200) {
+	    	dataTable.fnClearTable();
+            var resultJson = JSON.parse(http.responseText);
+            var desArray = resultJson.destinationResults;
+            console.log(desArray);
+            var dataSet = [];
+            for (var i=0; i<desArray.length; i++) {
+            	dataSet.push(['', desArray[i].region, desArray[i].country, desArray[i].phoneNumber]);
+            }
+                
+            if (dataSet.length > 0) {
+  			   dataTable.fnAddData(dataSet);
+  		    }
+	    }
+	}
+	http.send();
+}
 
