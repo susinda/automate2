@@ -76,15 +76,15 @@
                         <h3>Import</h3>
                         <p>Choose Import source</p>
                         	<div class="radio">
-							  <label><input type="radio" name="importType" id="manual" value="manual">Enter Manually</label>
+							  <label><input id="optManual" type="radio" name="importType" id="manual" value="manual">Enter Manually</label>
 							  <div id="fromManual"><textarea class="form-control" rows="2" id="txtManual" name="txtManual"></textarea></div>
 							</div>
 							<div class="radio">
-							  <label><input type="radio" name="importType" id="file" value="file" >From File</label>
-							  <div id="fromFile" style="display: inline"><input style="display: inline" type="file" id="myFile"></div>
+							  <label><input id="optFile" type="radio" name="importType" id="file" value="file" >From File</label>
+							  <div id="fromFile" style="display: inline"><input style="display: inline" type="file" id="myFileDialog"></div>
 							</div>
 							<div class="radio" >
-							  <label><input type="radio" name="importType" id="api" value="api">From NS Api</label>
+							  <label><input id="optApi" type="radio" name="importType" id="api" value="api">From NS Api</label>
 							  <div style="display: inline" id="fromApi"><button type="button" id="btnImportApi">Query</button>
 							  <label name="nsDestApi" id="nsDestApi">http://xxxxxxxxx/services/destinations</label></div>
 							</div>   

@@ -6,6 +6,7 @@ $(document).ready(function () {
     $("#fromApi").hide();
     $("#nsDestApi").hide();
     console.log("page loaded");
+    $('#example').dataTable().fnClearTable();
     
     //Wizard
     $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
@@ -83,6 +84,7 @@ $(document).ready(function () {
 	      
    });
 
+  document.getElementById('myFileDialog').addEventListener('change', readSingleFile, false);
 });
 
 
@@ -95,29 +97,71 @@ function prevTab(elem) {
 
 function validateStep1() {
 	console.log("validateStep1 called");
-	var textVal = $("#txtManual").val();
-	if (textVal === "") {
-		return false;
-	} else {
-		var dataSet = [];
-		if (textVal.includes(",") ) {
-			var res = textVal.split(",");
-			var arrayLength = res.length;
-			for (var i = 0; i < arrayLength; i++) {
-			    dataSet.push(['', 'NA', 'NA', res[i]]);
+	
+	if ($("#optManual").is(':checked')) {
+		var textVal = $("#txtManual").val();
+		if (textVal === "") {
+			return false;
+		} else {
+			$('#example').dataTable().fnClearTable();
+			var dataSet = [];
+			if (textVal.includes(",") ) {
+				var res = textVal.split(",");
+				var arrayLength = res.length;
+				for (var i = 0; i < arrayLength; i++) {
+				    dataSet.push(['', 'NA', 'NA', res[i]]);
+				}
+			} else {
+				dataSet.push(['', 'NA', 'NA', textVal])
 			}
 			
-		} else {
-			dataSet.push(['', 'NA', 'NA', textVal])
+			
+			$('#example').dataTable().fnAddData(dataSet);
+			return true;
 		}
-		
-		$('#example').dataTable().fnClearTable();
-		$('#example').dataTable().fnAddData(dataSet);
-		return true;
-	}
+	} else if ($("#optFile").is(':checked')) {
+		if ($("#example").dataTable().fnGetData().length > 0) {
+			return true;
+		} else {
+			alert("Data has not been loaded properly from the file");
+			return false;
+		}
+   }
 }
 
 function validateStep2() {
 	console.log("validateStep1 called");
 	return true;
 }
+
+function readSingleFile(evt) {
+	
+	$('#example').dataTable().fnClearTable();
+    var f = evt.target.files[0]; 
+    if (f) {
+      var r = new FileReader();
+      r.onload = function(e) { 
+	      var contents = e.target.result;
+	      var allLines = contents.split(/\r\n|\n/);
+	      var dataSet = [];
+		  for (var i = 0; i < allLines.length; i++) {
+			if (allLines[i] != "") {
+			  console.log(allLines[i]);
+			  var res = allLines[i].split(",");
+			  if (res.length === 3 && allLines[i].length <= 96) {
+				  dataSet.push(['', res[0], res[1], res[2]]);
+			  }
+		  	}
+		  }
+		 
+		  if (dataSet.length > 0) {
+			  $('#example').dataTable().fnAddData(dataSet);
+		  }
+      }
+      r.readAsText(f);
+    } else { 
+      alert("Failed to load file");
+    }
+
+  }
+
