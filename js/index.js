@@ -1,3 +1,5 @@
+var dataTable;
+
 $(document).ready(function () {
     //Initialize tooltips
     //$('.nav-tabs > li a[title]').tooltip();
@@ -6,7 +8,8 @@ $(document).ready(function () {
     $("#fromApi").hide();
     $("#nsDestApi").hide();
     console.log("page loaded");
-    $('#example').dataTable().fnClearTable();
+    dataTable = $('#example').dataTable();
+    //dataTable.fnClearTable();
     
     //Wizard
     $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
@@ -70,6 +73,7 @@ $(document).ready(function () {
     	  $("#nsDestApi").show();
     });
     
+    dataTable.fnDestroy();
   $("#example").DataTable( {
 	  columnDefs: [ {
 	      orderable: false,
@@ -103,20 +107,22 @@ function validateStep1() {
 		if (textVal === "") {
 			return false;
 		} else {
-			$('#example').dataTable().fnClearTable();
+			dataTable.fnClearTable();
 			var dataSet = [];
 			if (textVal.includes(",") ) {
 				var res = textVal.split(",");
 				var arrayLength = res.length;
 				for (var i = 0; i < arrayLength; i++) {
+					if (res[i].length > 4) {
 				    dataSet.push(['', 'NA', 'NA', res[i]]);
+					}
 				}
 			} else {
 				dataSet.push(['', 'NA', 'NA', textVal])
 			}
 			
 			
-			$('#example').dataTable().fnAddData(dataSet);
+			dataTable.fnAddData(dataSet);
 			return true;
 		}
 	} else if ($("#optFile").is(':checked')) {
@@ -136,11 +142,12 @@ function validateStep2() {
 
 function readSingleFile(evt) {
 	
-	$('#example').dataTable().fnClearTable();
+	dataTable.fnClearTable();
     var f = evt.target.files[0]; 
     if (f) {
       var r = new FileReader();
       r.onload = function(e) { 
+    	  if(f.type === "text/csv") {
 	      var contents = e.target.result;
 	      var allLines = contents.split(/\r\n|\n/);
 	      var dataSet = [];
@@ -155,8 +162,9 @@ function readSingleFile(evt) {
 		  }
 		 
 		  if (dataSet.length > 0) {
-			  $('#example').dataTable().fnAddData(dataSet);
+			  dataTable.fnAddData(dataSet);
 		  }
+    	}
       }
       r.readAsText(f);
     } else { 
